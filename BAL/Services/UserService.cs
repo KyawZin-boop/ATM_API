@@ -75,7 +75,7 @@ namespace BAL.Services
         {
             try
             {
-                var user = await _unitOfWork.User.GetByGuid(inputModel.UserID);
+                var user = (await _unitOfWork.User.GetByCondition(x => x.UserID == inputModel.UserID && x.ActiveFlag)).FirstOrDefault();
                 if (user is null)
                 {
                     throw new Exception("User not found.");
@@ -92,6 +92,10 @@ namespace BAL.Services
                 if (inputModel.Balance != 0)
                 {
                     user.Balance = inputModel.Balance;
+                }
+                if(inputModel.UpdatedBy != null)
+                {
+                    user.UpdatedBy = inputModel.UpdatedBy;
                 }
 
                 user.UpdatedAt = DateTime.UtcNow;
