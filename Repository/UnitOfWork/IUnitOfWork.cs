@@ -11,6 +11,7 @@ namespace Repository.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         IUserRepository User { get; }
+        ITransactionRepository Transaction { get; }
         AppSettings AppSettings { get; }
         Task<int> SaveChangesAsync();
     }

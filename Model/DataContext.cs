@@ -17,6 +17,7 @@ namespace BAL
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<User> Tbl_User { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
     }
 }
