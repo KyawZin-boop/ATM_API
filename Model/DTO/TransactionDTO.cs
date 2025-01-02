@@ -8,6 +8,7 @@ namespace Model.DTO
 {
     public class TransactionDTO
     {
+        public Guid UserID { get; set; }
         public decimal Amount { get; set; }
     }
 }

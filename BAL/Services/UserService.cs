@@ -17,9 +17,10 @@ namespace BAL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UserService(IUnitOfWork unitOfWork)
+        public UserService(IUnitOfWork unitOfWork, IMapper imapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = imapper;
         }
 
         public async Task<IEnumerable<User>> GetUsers()

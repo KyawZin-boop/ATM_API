@@ -1,5 +1,6 @@
 ﻿using BAL.IServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Model.ApplicationConfig;
 using Model.DTO;
@@ -18,30 +19,58 @@ namespace API.Controllers
         }
 
         [HttpPost("Deposit")]
-        public async Task<IActionResult> Deposit(Guid id,[FromBody] TransactionDTO inputModel)
+        public async Task<IActionResult> Deposit(TransactionDTO inputModel)
         {
             try
             {
-                await _transactionService.Deposit(id, inputModel);
+                await _transactionService.Deposit(inputModel);
                 return Ok(new ResponseModel { Message = "Deposit Success.", Status = ApiStatus.Success });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
 
         [HttpPost("Withdraw")]
-        public async Task<IActionResult> Withdraw(Guid id, [FromBody] TransactionDTO inputModel)
+        public async Task<IActionResult> Withdraw(TransactionDTO inputModel)
         {
             try
             {
-                await _transactionService.Withdraw(id, inputModel);
+                await _transactionService.Withdraw(inputModel);
                 return Ok(new ResponseModel { Message = "Withdraw Success.", Status = ApiStatus.Success });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.Success });
+            }
+        }
+
+        [HttpGet("GetTransactions")]
+        public async Task<IActionResult> GetTransactions()
+        {
+            try
+            {
+                var transactions = await _transactionService.GetTransactions();
+                return Ok(new ResponseModel { Message = "Success.", Data = transactions, Status = ApiStatus.Success });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
+            }
+        }
+
+        [HttpGet("GetTransactionByUserID")]
+        public async Task<IActionResult> GetTransactionByUserID(Guid id)
+        {
+            try
+            {
+                var transactions = await _transactionService.GetTransactionByUserID(id);
+                return Ok(new ResponseModel { Message = "Success.", Data = transactions, Status = ApiStatus.Success });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
     }

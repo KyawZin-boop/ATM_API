@@ -27,7 +27,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new ResponseModel { Message = "Error.", Status = ApiStatus.SystemError });
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
 
@@ -41,7 +41,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new ResponseModel { Message = "Error.", Status = ApiStatus.SystemError });
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
 
@@ -55,7 +55,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new ResponseModel { Message = "Error.", Status = ApiStatus.SystemError });
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
 
@@ -69,7 +69,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new ResponseModel { Message = "Error.", Status = ApiStatus.SystemError });
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
 
@@ -83,7 +83,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new ResponseModel { Message = "Error.", Status = ApiStatus.SystemError });
+                return Ok(new ResponseModel { Message = ex.Message, Status = ApiStatus.SystemError });
             }
         }
 
