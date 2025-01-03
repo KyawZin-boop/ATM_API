@@ -20,10 +20,12 @@ namespace Repository.UnitOfWork
             _context = context;
             User = new UserRepository(context);
             Transaction = new TransactionRepository(context);
+            Files = new FileRepository(context);
             AppSettings = appSettings.Value;
         }
         public IUserRepository User { get; set; }
         public ITransactionRepository Transaction { get; set; }
+        public IFileRepository Files { get; set; }
         public AppSettings AppSettings { get; set; }
         public void Dispose()
         {

@@ -1,4 +1,5 @@
 ﻿using BAL.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.ApplicationConfig;
@@ -6,6 +7,7 @@ using Model.DTO;
 
 namespace API.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -17,6 +19,7 @@ namespace API.Controllers
             _userService = userService;
         }
 
+        [Authorize]
         [HttpGet("GetUsers")]
         public async Task<IActionResult> GetUsers()
         {
@@ -31,6 +34,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("GetUserById")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
@@ -59,6 +63,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser(UpdateUserDTO inputModel)
         {
@@ -73,6 +78,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("DeleteUser")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
@@ -92,8 +98,8 @@ namespace API.Controllers
         {
             try
             {
-                await _userService.LoginUser(inputModel);
-                return Ok(new ResponseModel { Message = "Login Success.", Status = ApiStatus.Success });
+                var res=await _userService.LoginUser(inputModel);
+                return Ok(new ResponseModel { Message = "Login Success.", Status = ApiStatus.Success,Data=res });
             }
             catch (Exception ex)
             {

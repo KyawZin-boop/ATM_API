@@ -19,5 +19,6 @@ namespace BAL
 
         public DbSet<User> User { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<Files> Files { get; set; }
     }
 }

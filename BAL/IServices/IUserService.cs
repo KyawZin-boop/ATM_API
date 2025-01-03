@@ -16,6 +16,6 @@ namespace BAL.IServices
         Task CreateUser(UserDTO inputModel);
         Task UpdateUser(UpdateUserDTO inputModel);
         Task DeleteUser(Guid id);
-        Task LoginUser(LoginUserDTO inputModel);
+        Task<string> LoginUser(LoginUserDTO inputModel);
     }
 }

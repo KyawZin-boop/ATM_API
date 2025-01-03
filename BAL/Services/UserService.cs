@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using BAL.Common;
 using BAL.IServices;
 using Model.DTO;
 using Model.Enitities;
@@ -16,11 +18,13 @@ namespace BAL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly TokenProvider _tokenProvider;
 
-        public UserService(IUnitOfWork unitOfWork, IMapper imapper)
+        public UserService(IUnitOfWork unitOfWork, IMapper imapper, TokenProvider tokenProvider)
         {
             _unitOfWork = unitOfWork;
             _mapper = imapper;
+            _tokenProvider = tokenProvider;
         }
 
         public async Task<IEnumerable<User>> GetUsers()
@@ -130,15 +134,24 @@ namespace BAL.Services
             }
         }
 
-        public async Task LoginUser(LoginUserDTO inputModel)
+        public async Task<string> LoginUser(LoginUserDTO inputModel)
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(inputModel.UserName) || string.IsNullOrWhiteSpace(inputModel.Password))
+                {
+                    throw new ArgumentException("UserName and Password cannot be null or empty.");
+                }
+
                 var user = (await _unitOfWork.User.GetByCondition(x => x.UserName == inputModel.UserName && x.Password == inputModel.Password && x.ActiveFlag)).FirstOrDefault();
                 if (user is null)
                 {
                     throw new Exception("Incorrect Password or UserName.");
                 }
+
+                string token = _tokenProvider.Create(user);
+
+                return token;
             }
             catch (Exception ex)
             {

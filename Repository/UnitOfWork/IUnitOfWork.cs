@@ -12,6 +12,7 @@ namespace Repository.UnitOfWork
     {
         IUserRepository User { get; }
         ITransactionRepository Transaction { get; }
+        IFileRepository Files { get; }
         AppSettings AppSettings { get; }
         Task<int> SaveChangesAsync();
     }
