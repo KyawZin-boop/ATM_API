@@ -19,7 +19,7 @@ namespace BAL.Common
                 var securityScheme = new OpenApiSecurityScheme
                 {
                     Name = "JWT Authentication",
-                    Description = "Enter your JWT token in this field. Add 'Bearer ' before the token.",
+                    Description = "Enter your JWT token in this field.",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
                     Scheme = JwtBearerDefaults.AuthenticationScheme,

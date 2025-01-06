@@ -1,4 +1,5 @@
-﻿using BAL.IServices;
+﻿using Asp.Versioning;
+using BAL.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,8 @@ using Model.ApplicationConfig;
 namespace API.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class FileController : ControllerBase
     {

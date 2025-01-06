@@ -8,7 +8,7 @@ namespace API
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<User, UserDTO>();
         }
     }
 }
