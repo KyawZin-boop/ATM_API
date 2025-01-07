@@ -27,13 +27,13 @@ namespace BAL.Services
             _tokenProvider = tokenProvider;
         }
 
-        public async Task<IEnumerable<UserDTO>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             try
             {
                 var users = await _unitOfWork.User.GetByCondition(x => x.ActiveFlag);
-                var userDto = _mapper.Map<IEnumerable<UserDTO>>(users);
-                return userDto;
+                //var userDto = _mapper.Map<IEnumerable<UserDTO>>(users);
+                return users;
             }
             catch(Exception ex)
             {

@@ -11,7 +11,7 @@ namespace BAL.IServices
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserDTO>> GetUsers();
+        Task<IEnumerable<User>> GetUsers();
         Task<User> GetUserById(Guid id);
         Task CreateUser(UserDTO inputModel);
         Task UpdateUser(UpdateUserDTO inputModel);
